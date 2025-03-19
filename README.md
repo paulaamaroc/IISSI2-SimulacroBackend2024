@@ -1,73 +1,56 @@
-# DeliverUS - Simulation project
+# IISSI-2 IS: Simulacro de examen de laboratorio
 
-## DeliverUS
+## Enunciado
 
-You can find DeliverUS documentation at: <https://github.com/IISSI2-IS-2025>
+Una vez se ha puesto en marcha la primera versión de DeliverUS, los inversores han solicitado la inclusión de una nueva funcionalidad que consiste en ofrecer a los propietarios la posibilidad de promocionar sus restaurantes. Cada propietario sólo podrá promocionar uno de sus restaurantes.
 
-## Introduction
+Un propietario podrá promocionar un restaurante de dos maneras distintas:
 
-This repository includes the complete backend (`DeliverUS-Backend` folder) and the `owner` frontend (`DeliverUS-Frontend-Owner` folder).
+* En el formulario de creación de restaurante. Por defecto, se seleccionará la opción de no promocionado. Si el propietario indica que el nuevo restaurante debe estar promocionado, pero ya existían restaurantes promocionados del mismo propietario, al pulsar el botón `Save` se mostrará un error y no se creará el restaurante.
 
-## Pinned Restaurants. Description
+* En la pantalla de "Mis restaurantes", mediante un botón mostrado junto a cada restaurante, que permitirá mediante su pulsación promocionar el restaurante en cuestión. Si el propietario pulsa el botón para promocionar un nuevo restaurante y ya existían otros restaurantes promocionados del mismo dueño, se procederá a promocionar el restaurante indicado y se marcará como "no promocionado" el restaurante que lo fuese anteriormente. La aplicación debe pedir confirmación al propietario cuando se pulse el botón; utilice para ello el componente suministrado `ConfirmationModal`, similar al componente `DeleteModal` utilizado en clase.
 
-After the initial launch of DeliverUS, investors have requested a new feature that allows owners to pin their restaurants. Each owner can pin as many restaurants as they wish.
+Además, los restaurantes promocionados aparecerán siempre al principio de los listados de restaurantes que se le presentan tanto a los propietarios como a los clientes. Además de presentarse al principio, los restaurantes promocionados deben destacarse visualmente, por lo que aparecerá una etiqueta de texto `¡En promoción!` con el color principal de la marca.
 
-An owner can pin restaurants in two different ways:
+### Ejercicio 1
 
-* In the restaurant creation form. By default, it will not be pinned, but the owner can choose to pin it. To do this, a `Switch` should be provided that works with a property called `pinned`. If the `Switch` is checked, the restaurant should be created as pinned. The backend expects the `pinned` property to be a boolean and optional. If the property is not present, it should be created as not pinned.
+Realice todos los cambios necesarios en el proyecto de backend para implementar el nuevo requisito.
 
-* On the "My Restaurants" screen, through an icon that will act as a button and will be displayed next to each restaurant. By clicking it, the restaurant will be pinned or unpinned. The application should ask for confirmation from the owner when the button is pressed: use the provided `ConfirmationModal` component, similar to the `DeleteModal` component used in class. The system will inform the user if the restaurant has been pinned or unpinned.
+### Ejercicio 2
 
-Finally, pinned restaurants will always appear at the top of the restaurant lists presented to their owner and will be ordered by the date they were pinned (oldest first), followed by the non-pinned ones.
+Realice todos los cambios necesarios en el proyecto de frontend para implementar el nuevo requisito.
 
-### Tasks on backend
+![captura1](https://user-images.githubusercontent.com/19324988/235651836-d57d9c7e-4b8d-46a2-9154-b414a7abf702.png)
 
-Make all the necessary changes in the backend project to implement the new requirement. The backend tests expect the route to be: `PATCH /restaurants/:restaurantId/togglePin` and that restaurants have a new property called `pinnedAt`.
+![captura2](https://user-images.githubusercontent.com/19324988/235651849-4d03c7d9-f332-4952-8cbc-9fa5db4f97fb.png)
 
-In the backend tests, note the body of `POST /restaurants/` includes a `pinned` property to be either true or false.  
+![captura3](https://user-images.githubusercontent.com/19324988/235651853-e1d13916-4f47-4e17-97e0-5696b647bee7.png)
 
-Do not forget that controllers in charge of listings must be adapted to the new requirement. 
+## Introducción
 
-Remember that you can run the backend tests with:
-```Bash
-npm run test:backend
-```
+Este repositorio incluye el backend completo (carpeta `DeliverUS-Backend`) y el frontend de `owner` (carpeta `DeliverUS-Frontend-Owner`). Servirá como base para realizar el examen de laboratorio de la asignatura.
 
-### Requirements summary
-
-* RF1. Ability to create a pinned or unpinned restaurant.
-* RF2. Ability to set an existing restaurant as pinned or unpinned. 
-* RF3. List restaurants in the described order: first the pinned restaurants ordered by pin date (the oldest pinned restaurants must come first), and then the unpinned restaurants. 
-
-## Environment Setup
+## Preparación del entorno
 
 ### a) Windows
 
-* Open a terminal and run the command:
-
-    ```Bash
-    npm run install:all:win
-    ```
+* Abra un terminal y ejecute el comando `npm run install:all:win`.
 
 ### b) Linux/MacOS
 
-* Open a terminal and run the command:
+* Abra un terminal y ejecute el comando `npm run install:all:bash`.
 
-    ```Bash
-    npm run install:all:bash
-    ```
-
-## Execution
+## Ejecución
 
 ### Backend
 
-* To **recreate migrations and seeders**, open a terminal and run the command:
+* Para **rehacer las migraciones y seeders**, abra un terminal y ejecute el comando
 
     ```Bash
     npm run migrate:backend
     ```
 
-* To **start the backend**, open a terminal and run the command:
+* Para **ejecutarlo**, abra un terminal y ejecute el comando
 
     ```Bash
     npm run start:backend
@@ -75,41 +58,23 @@ npm run test:backend
 
 ### Frontend
 
-* To **run the `customer` frontend application**, open a new terminal and run the command:
-
-    ```Bash
-    npm run start:frontend:customer
-    ```
-
-* To **run the `owner` frontend application**, open a new terminal and run the command:
+* Para **ejecutar la aplicación frontend de `owner`**, abra un nuevo terminal y ejecute el comando
 
     ```Bash
     npm run start:frontend:owner
     ```
 
-## Debugging
+## Depuración
 
-* To **debug the backend**, make sure **NO** instance is running, click the `Run and Debug` button on the sidebar, select `Debug Backend` from the dropdown list, and press the *Play* button.
+* Para **depurar el backend**, asegúrese de que **NO** existe una instancia en ejecución, pulse en el botón `Run and Debug` de la barra lateral, seleccione `Debug Backend` en la lista desplegable, y pulse el botón de *Play*.
 
-* To **debug the frontend**, make sure there **IS** a running instance of the frontend you want to debug, click the `Run and Debug` button on the sidebar, select `Debug Frontend` from the dropdown list, and press the *Play* button.
+* Para **depurar el frontend**, asegúrese de que **EXISTE** una instancia en ejecución del frontend que desee depurar, pulse en el botón `Run and Debug` de la barra lateral, seleccione `Debug Frontend` en la lista desplegable, y pulse el botón de *Play*.
 
-## Testing
+## Test
 
-* To verify the proper functioning of the backend, you can run the included test suite by executing the following command:
+* Para comprobar el correcto funcionamiento de backend puede ejecutar el conjunto de tests incluido a tal efecto. Para ello ejecute el siguiente comando:
 
     ```Bash
     npm run test:backend
     ```
-
-**Warning: Tests cannot be modified.**
-
-## Port Issues
-
-Sometimes, backend or frontend processes, with or without debugging, may get stuck without releasing the used ports, preventing other processes from running. It is recommended to close and restart VSC to close such processes.
-
-## Submission Procedure
-
-1. Delete the **node_modules** folders from backend and frontend and the **.expo** folder from the frontend.
-2. Create a ZIP that includes the entire project. **Important: Ensure that the ZIP is not the same as the one you downloaded and includes your solution**
-3. Notify the instructor before submitting.
-4. When the instructor gives the green light, you can upload the ZIP to the Virtual Teaching platform. Wait for the platform to show a link to the ZIP before clicking the accept button.
+**Advertencia: Los tests no pueden ser modificados.**
